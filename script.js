@@ -6,7 +6,7 @@ function runUserCode(input) {
     eval(input); // Vulnerability #2
 }
 
-// INSECURE: Unvalidated.  input used to build fetch request (SSRF risk)
+// INSECURE: Unvalidated.  input used to  build fetch request (SSRF risk)
 function fetchCustomUrl() {
     const customUrl = prompt("Enter API URL:"); 
     fetch(customUrl)  // Vulnerability #3
