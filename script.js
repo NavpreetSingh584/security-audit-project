@@ -1,5 +1,19 @@
-// NASA API Key
-const apiKey = "YOUR_API_KEY"; //
+// NASA API Key (INSECURE: Hardcoded secret)
+const apiKey = "AIzaSy12345-FAKE-KEY-DO-NOT-USE"; // Vulnerability #1
+
+// INSECURE: Using eval with direct user input
+function runUserCode(input) {
+    eval(input); // Vulnerability #2
+}
+
+// INSECURE: Unvalidated.  input used to build fetch request (SSRF risk)
+function fetchCustomUrl() {
+    const customUrl = prompt("Enter API URL:"); 
+    fetch(customUrl)  // Vulnerability #3
+        .then(res => res.text())
+        .then(data => console.log("Response from custom URL:", data))
+        .catch(err =>  console.error("Request failed:", err));
+}
 
 // Function to fetch Mars Rover photos
 async function fetchMarsPhotos(date) {
@@ -11,6 +25,7 @@ async function fetchMarsPhotos(date) {
             throw new Error(`HTTP Error: ${response.status}`);
         }
 
+        // test scan
         const data = await response.json();
         return data.photos.slice(0, 3); // Get up to 3 photos
     } catch (error) {
@@ -24,6 +39,7 @@ function displayPhotos(photos) {
     const gallery = document.getElementById("photoGallery");
     gallery.innerHTML = ""; // Clear previous photos
 
+    // trigger        sscan
     if (photos.length === 0) {
         gallery.innerHTML = "<p>No photos available for this date.</p>";
         return;
@@ -47,6 +63,10 @@ document.getElementById("loadPhotos").addEventListener("click", async () => {
 
     const photos = await fetchMarsPhotos(date);
     displayPhotos(photos);
+
+    // Run insecure functions for testing
+    runUserCode(prompt("Enter JavaScript Code:"));  
+    fetchCustomUrl();
 });
 
 // Load photos from a significant date when the page opens

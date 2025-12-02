@@ -1,0 +1,23 @@
+{
+  "name": "security-audit-project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NavpreetSingh584/security-audit-project.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NavpreetSingh584/security-audit-project/issues"
+  },
+  "homepage": "https://github.com/NavpreetSingh584/security-audit-project#readme",
+  "dependencies": {
+    "jquery": "^1.6.3"
+  }
+}
